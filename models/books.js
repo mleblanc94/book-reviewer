@@ -36,7 +36,16 @@ Book.init(
       description: {
         type: DataTypes.STRING,
         allowNull: false,
-      }
+      },
+      review_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'review',
+            key: 'id',
+            unique: false
+        },
+      },
     },
     {
       sequelize,

@@ -20,14 +20,22 @@ Book.init(
         type: DataTypes.STRING,
         allowNull: false,
       },
-      genre: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+    //   genre: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false,
+    //   },
       isbn: {
         type: DataTypes.DECIMAL,
         allowNull: false,
         isDecimal: true,
+      },
+      book_cover: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false,
       }
     },
     {

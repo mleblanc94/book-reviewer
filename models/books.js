@@ -24,28 +24,28 @@ Book.init(
     //     type: DataTypes.STRING,
     //     allowNull: false,
     //   },
-      isbn: {
-        type: DataTypes.DECIMAL,
-        allowNull: false,
-        isDecimal: true,
-      },
+      // isbn: {
+      //   type: DataTypes.DECIMAL,
+      //   allowNull: false,
+      //   isDecimal: true,
+      // },
       book_cover: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       description: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
-      review_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'review',
-            key: 'id',
-            unique: false
-        },
-      },
+      // review_id: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: false,
+      //   references: {
+      //       model: 'review',
+      //       key: 'id',
+      //       unique: false
+      //   },
+      // },
     },
     {
       sequelize,

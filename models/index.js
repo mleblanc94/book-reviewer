@@ -8,17 +8,23 @@ Review.belongsTo(User, {
     foreignKey: 'user_id', as: 'user' 
 });
 
+// Reviews belong to books
+
+Review.belongsTo(Book, { 
+    foreignKey: 'book_id',
+});
+
 // Books have many reviews
 
-Book.hasMany(Review, {
-    foreignKey: 'review_id', 
-});
+// Book.hasMany(Review, {
+//     foreignKey: 'review_id', 
+// });
 
 // Users have many reviews
 
-User.hasMany(Review, {
-    foreignKey: 'review_id', 
-});
+// User.hasMany(Review, {
+//     foreignKey: 'review_id', 
+// });
   
 
 module.exports = {

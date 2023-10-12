@@ -1,5 +1,6 @@
 const router = ('express').Router();
 const { User } = require('../../models');
+const sendMail = require('../../utils/sendMail');
 
 router.post('/signup', async (req,res) => {
     User.create({
@@ -13,6 +14,7 @@ router.post('/signup', async (req,res) => {
             req.session.logged_in = true;
             res.json(dbUserData);
         });
+        sendMail(email);
     })
     .catch(err => {
         console.log(err);

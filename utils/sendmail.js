@@ -11,10 +11,10 @@ const transporter = nodemailer.createTransport({
     }
   });
 
-  async function main() { 
+  async function sendEmail(userEmail) { 
     const info = await transporter.sendMail({
     from: 'BookReviewerProject@gmail.com',
-    to: 'recipient@example.com',
+    to: userEmail,
     subject: 'Welcome to Book Reviewer!📚🐛',
     text: "Welcome fellow bookworms! We appreciate you joining our Book Review website. Quick search and review each book you read with ease! We are a small group of devs-in-training at the University of New Hampshire's Bootcamp. Please feel free to email us at BookReviewerpPoject@gmail.com with questions, concerns, or ideas!"
    });
@@ -28,4 +28,6 @@ const transporter = nodemailer.createTransport({
   });
   };
 
-  main().catch(console.error);
+  sendEmail().catch(console.error);
+
+  module.exports = { sendEmail }

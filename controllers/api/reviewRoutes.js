@@ -1,10 +1,10 @@
-const router = ('express').Router();
+const router = require('express').Router();
 const { Review, Book, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // Post a new review
 router.post('/add', withAuth, async (req, res) => {
-    
+
     Book.create({
         book_name: req.body.book_name,
         author_name: req.body.author_name,

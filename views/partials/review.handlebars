@@ -1,23 +1,38 @@
-<div class="row">
-    <div class="container blogBox">
-        <div class="row  justify-content-center headerRow">
-            <div class="col-8">
-                <h2>
-                    <a class="blogTitle text-uppercase" href="/review/{{id}}">{{title}}</a>                     
-                </h2>
+<div class="card">
+    <div class="row">
+        <div class="col-sm-2">
+            <img class="d-block cover-block" src="{{book.book_cover}}" alt="{{book.book_name}}">
+        </div>
+        <div class="col-sm-10">
+            <div class="card-block">
+                <h4 class="card-title">
+                    <p class="bookTitle">
+                        {{book.book_name}}</p>
+                </h4>
+                <p><strong>By:</strong> {{book.author_name}}.</p>
+                <p class="bookDesc">{{book.description}}</p>
             </div>
-            <div class="col-4">
-                <p class="blogCreate text-right">Created by
-                    {{user.username}}
+        </div>
+        <div class="col-sm-12">
+            <div class="review-card-block">
+                <h4 class="card-title">
+                    <p class="reviewTitle">
+                        Review</p>
+                </h4>
+                <p class="reviewCreate">Rating:  {{{getStars rating}}}</p>
+                <p class="reviewCreate">Created
+                    by {{user.name}}
                     on
                     {{formatDate created_at}}
                 </p>
+                <p class="reviewDescMain">{{comment}}</p>
+                {{!-- {{#if (eq user_id logged_in)}}
+                <p>This is a perfect rating!</p>
+                {{else}}
+                <p>This is a good rating.</p>
+                {{/if}} --}}
             </div>
-        </div>
-        <div class="blogDesc">
-            <p class="text-justify blogDescMain">
-                {{content}}
-            </p>
         </div>
     </div>
 </div>
+<br>

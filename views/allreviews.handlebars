@@ -1,0 +1,16 @@
+{{!-- Create New Post Button --}}
+<br>
+<section class="new-post-section">
+    <button type="submit" id="btnNewReview">+ Create new review</button>
+</section>
+<br>
+
+{{!-- Displays all the Reviews --}}
+{{#each reviews as |reviewitem|}}
+
+{{> review reviewitem }}
+
+{{/each}}
+
+{{!-- Calls the JS File to call the related route for creation of new review --}}
+<script src="/js/createreview.js"></script>

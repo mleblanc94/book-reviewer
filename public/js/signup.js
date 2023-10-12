@@ -1,15 +1,15 @@
 async function fnUserSignup(event) {
     event.preventDefault();
 
-    const username = document.querySelector('#txtboxNameSignUp').value.trim();
+    const name = document.querySelector('#txtboxNameSignUp').value.trim();
     const useremail = document.querySelector('#txtboxEmailSignUp').value.trim();
     const password = document.querySelector('#txtboxPwdSignUp').value.trim();
-
-    if (username && password) {
-        const response = await fetch('/api/signup', {
+    
+    if (useremail && password) {
+        const response = await fetch('/api/users/signup', {
             method: 'post',
             body: JSON.stringify({
-                username,
+                name,
                 useremail,
                 password
             }),
@@ -18,7 +18,7 @@ async function fnUserSignup(event) {
             }
         });
 
-        if (response.ok) document.location.replace('/dashboard');
+        if (response.ok) document.location.replace('/');
         else alert(response.statusText);
     }
 }

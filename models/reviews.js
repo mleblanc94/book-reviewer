@@ -18,7 +18,7 @@ Review.init(
         isDecimal: true,
       },
       comment: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(5000),
         allowNull: false,
       },
       book_id: {
@@ -42,8 +42,7 @@ Review.init(
 
     },
     {
-      sequelize,
-      timestamps: false,
+      sequelize,      
       freezeTableName: true,
       underscored: true,
       modelName: 'review',

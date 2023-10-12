@@ -2,20 +2,19 @@
 async function fnCreateNewReview(event) {
     event.preventDefault();
     //Get Values from HTML
-    const book_name = document.querySelector('#book_name').value.trim();
-    const author_name = document.querySelector('#author_name').value.trim();
-    const book_cover = document.querySelector('#book_cover').value.trim();
-    const description = document.querySelector('#description').value.trim();
-    const rating = document.querySelector('#postTitle').value.trim();
-    const reviewContent = document.querySelector('#postText').value.trim();
-
-    const response = await fetch(`/api/reviews`, {
+    const book_name = document.querySelector('#book-title').value.trim();
+    const author_name = document.querySelector('#book-authors').value.trim();
+    const book_cover = document.getElementById("book-cover-val").value;       
+    const book_description = document.querySelector('#book-description').value;    
+    const reviewContent = document.querySelector('#reviewText').value.trim();
+    const ratingValue = document.querySelector('#ratingValue').textContent;
+    const response = await fetch(`/api/reviews/add`, {
         method: 'POST',
         body: JSON.stringify({
             book_name,
             author_name,
             book_cover,
-            description,
+            book_description,
             rating,
             reviewContent
         }),
@@ -25,10 +24,19 @@ async function fnCreateNewReview(event) {
     });
 
     if (response.ok) {
-        document.location.replace('/dashboard');//Call the handler
+        document.location.replace('/');//Call the handler
     } else {
         alert(response.statusText);//Error
     }
 }
+
+function ratingslider(){    
+    const ratingSlider = document.querySelector('#ratingSlider');
+    const ratingValue = document.querySelector('#ratingValue');
+    const rating = ratingSlider.value;
+    ratingValue.textContent = `${rating}`;    
+}
+
 //Button Event Listner
 document.querySelector('#frmCreateReview').addEventListener('submit', fnCreateNewReview);
+document.getElementById('ratingSlider').addEventListener('input', ratingslider);

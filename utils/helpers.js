@@ -7,7 +7,6 @@ function formatDate(date) {
 
 //Function to display Rating stars
 function getStars(rating) {
-    
     // Round to nearest half
     rating = Math.round(rating * 2) / 2;
     let output = [];
@@ -23,10 +22,8 @@ function getStars(rating) {
     for (let x = (5 - rating); x >= 1; x--)
       output.push('<i class="fa fa-star-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
   
-      strResultsStars = output.join('');
-      
-      return strResultsStars;
-  
+      strResultsStars = output.join(''); 
+      return strResultsStars;  
   }
 
 module.exports = { formatDate, getStars}

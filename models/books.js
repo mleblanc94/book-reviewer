@@ -13,43 +13,24 @@ Book.init(
         autoIncrement: true
       },
       book_name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(1000),
         allowNull: false,
       },
       author_name: {
         type: DataTypes.STRING,
         allowNull: false,
-      },
-    //   genre: {
-    //     type: DataTypes.STRING,
-    //     allowNull: false,
-    //   },
-      // isbn: {
-      //   type: DataTypes.DECIMAL,
-      //   allowNull: false,
-      //   isDecimal: true,
-      // },
+      },    
       book_cover: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(2500),
         allowNull: true,
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(5000),
         allowNull: true,
-      },
-      // review_id: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: false,
-      //   references: {
-      //       model: 'review',
-      //       key: 'id',
-      //       unique: false
-      //   },
-      // },
+      },     
     },
     {
-      sequelize,
-      timestamps: false,
+      sequelize,      
       freezeTableName: true,
       underscored: true,
       modelName: 'book',

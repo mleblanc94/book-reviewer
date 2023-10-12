@@ -2,7 +2,7 @@
 async function fnCreateReviewAction(event) {
     event.preventDefault();
 
-    document.location.replace('/dashboard/new')
+    document.location.replace('/api/reviews/new')
 }
 //Button Event Listner
 document.querySelector('#btnNewReview').addEventListener('click', fnCreateReviewAction);

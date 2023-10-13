@@ -14,7 +14,7 @@ router.post('/signup', async (req,res) => {
             req.session.logged_in = true;
             res.json(dbUserData);
         });
-        sendMail(email);
+        // sendMail(email);
     })
     .catch(err => {
         console.log(err);

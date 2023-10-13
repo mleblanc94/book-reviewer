@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
-const sendMail = require('../../utils/sendmail');
+const { sendMail }  = require('../../utils/sendmail');
 
 router.post('/signup', async (req,res) => {
     User.create({
@@ -9,12 +9,12 @@ router.post('/signup', async (req,res) => {
         password: req.body.password
     })
     .then(dbUserData => {
+        sendMail(req.body.useremail);
         req.session.save(() => {
             req.session.user_id = dbUserData.id;
             req.session.logged_in = true;
             res.json(dbUserData);
         });
-        // sendMail(email);
     })
     .catch(err => {
         console.log(err);

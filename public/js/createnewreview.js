@@ -7,7 +7,7 @@ async function fnCreateNewReview(event) {
     const book_cover = document.getElementById("book-cover-val").value;       
     const book_description = document.querySelector('#book-description').value;    
     const reviewContent = document.querySelector('#reviewText').value.trim();
-    const ratingValue = document.querySelector('#ratingValue').textContent;
+    const rating = document.querySelector('#ratingValue').textContent;
     const response = await fetch(`/api/reviews/add`, {
         method: 'POST',
         body: JSON.stringify({

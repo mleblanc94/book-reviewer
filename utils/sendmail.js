@@ -3,13 +3,12 @@ const nodemailer = require('nodemailer');
 // Transporter needed to deliver messages 
   // Simple Mail Transfer Protocol (SMTP)
 const transporter = nodemailer.createTransport({
-    service: 'Gmail',
     host: 'smtp.gmail.com',
-    port: 587,
-    secure: true,
+    // port: 587,
+    // secure: false,
     auth: {
       user: 'bookreviewerproject@gmail.com',
-      pass: 'process.env.EMAIL_PASS'
+      pass: 'jfys tuxk afol ermb'
     }
   });
 

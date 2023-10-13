@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
-const sendMail = require('../../utils/sendMail');
+const sendMail = require('../../utils/sendmail');
 
 router.post('/signup', async (req,res) => {
     User.create({

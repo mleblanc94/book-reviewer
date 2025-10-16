@@ -1,25 +1,28 @@
-const Sequelize = require('sequelize');
+const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-let sequelize;
-
-if (process.env.JAWSDB_URL || process.env.CLEARDB_DATABASE_URL) {
-  sequelize = new Sequelize(
-    process.env.JAWSDB_URL || process.env.CLEARDB_DATABASE_URL,
-    { dialect: 'mysql', logging: false }
-  );
-} else {
-  sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    {
-      host: process.env.DB_HOST || 'localhost',
-      port: process.env.DB_PORT || 3306,
-      dialect: 'mysql',
-      logging: false,
-    }
-  );
+if (!process.env.DATABASE_URL) {
+  console.error('DATABASE_URL is not set');
+  process.exit(1);
 }
 
-module.exports = sequelize;
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'postgres',
+  logging: false,
+  dialectOptions: {
+    ssl: { require: true, rejectUnauthorized: false },
+  },
+});
+
+async function initDatabase({ syncOptions } = {}) {
+  try {
+    await sequelize.authenticate();
+    await sequelize.sync(syncOptions);
+    console.log('Database connected & synced.');
+  } catch (err) {
+    console.error('Database init failed:', err);
+    process.exit(1);
+  }
+}
+
+module.exports = { sequelize, initDatabase };

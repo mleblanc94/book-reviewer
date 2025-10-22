@@ -1,32 +1,36 @@
-//Importing Dependencies
+require('dotenv').config();
+
+// Importing Dependencies
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const sequelize = require('./config/connection');// import sequelize connection
+
+// ⬇️ Destructure the exports you created
+const { sequelize, initDatabase } = require('./config/connection');
+
 const routes = require('./controllers');
-const helpers = require('./utils/helpers');// import helper functions
+const helpers = require('./utils/helpers');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Use env secret if available
 const sess = {
-    secret: 'secret',
-    cookie: {},
-    resave: false,
-    saveUninitialized: true,
-    store: new SequelizeStore({
-        db: sequelize,
-        checkExpirationInterval: 1000 * 60 * 10, // will check every 10 minutes
-        expiration: 1000 * 60 * 30 // will expire after 30 minutes
-    })
+  secret: process.env.SESSION_SECRET || 'dev-secret',
+  cookie: {},
+  resave: false,
+  saveUninitialized: false,
+  store: new SequelizeStore({
+    db: sequelize,
+    checkExpirationInterval: 1000 * 60 * 10,
+    expiration: 1000 * 60 * 30,
+  }),
 };
 app.use(session(sess));
 
-const hbs = exphbs.create({ helpers });//Declare Handlebars with Helper functions
-
-//Handlebars engines
+const hbs = exphbs.create({ helpers });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
@@ -34,10 +38,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-//Middleware
+// Middleware
 app.use(routes);
 
-// sync sequelize models to the database, then turn on the server
-sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log(`Now listening at http://localhost:${PORT}/`));
-});
+// ⬇️ Initialize DB first, THEN start the server
+(async () => {
+  await initDatabase(); // authenticate + sync (uses your connection.js)
+  app.listen(PORT, () => console.log(`Now listening at http://localhost:${PORT}/`));
+})();
